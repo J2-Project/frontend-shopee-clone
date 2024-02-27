@@ -47,9 +47,9 @@ export const get = async (url, params = null, options) => {
 };
 
 export const post = async (url, data, options) => {
-  DEFAULT_OPTION.headers.Authorization = localStorage.getItem('token')
-    ? `Bearer ${localStorage.getItem('token')}`
-    : null;
+  if (localStorage.getItem('token')) {
+    DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
 
   const finalOptions = {
     ...options,
@@ -62,9 +62,9 @@ export const post = async (url, data, options) => {
 };
 
 export const put = async (url, data, options) => {
-  DEFAULT_OPTION.headers.Authorization = localStorage.getItem('token')
-    ? `Bearer ${localStorage.getItem('token')}`
-    : null;
+  if (localStorage.getItem('token')) {
+    DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
 
   const finalOptions = {
     ...options,
@@ -77,9 +77,9 @@ export const put = async (url, data, options) => {
 };
 
 export const patch = async (url, data, options) => {
-  DEFAULT_OPTION.headers.Authorization = localStorage.getItem('token')
-    ? `Bearer ${localStorage.getItem('token')}`
-    : null;
+  if (localStorage.getItem('token')) {
+    DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
 
   const finalOptions = {
     ...options,
@@ -92,9 +92,9 @@ export const patch = async (url, data, options) => {
 };
 
 export const postFile = async (url, data, options) => {
-  DEFAULT_OPTION.headers.Authorization = localStorage.getItem('token')
-    ? `Bearer ${localStorage.getItem('token')}`
-    : null;
+  if (localStorage.getItem('token')) {
+    DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
 
   const finalOptions = {
     ...options,
