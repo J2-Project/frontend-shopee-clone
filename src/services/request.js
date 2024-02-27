@@ -1,7 +1,17 @@
 const DEFAULT_OPTION = {
   headers: {
-    Accept: 'application/json'
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    withCredentials: true,
+    withXSRFToken: true,
   }
+};
+
+export const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export const csrf = async () => {
+  return await get(`${BASE_API_URL}sanctum/csrf-cookie`);
 };
 
 const checkStatus = (response) => {
@@ -50,13 +60,17 @@ export const post = async (url, data, options) => {
   if (localStorage.getItem('token')) {
     DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
+  console.log(data)
 
   const finalOptions = {
     ...options,
     ...DEFAULT_OPTION,
     method: 'POST',
+    credentials: 'same-origin',
     body: JSON.stringify(data)
   };
+
+  // await csrf();
 
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };
@@ -73,6 +87,8 @@ export const put = async (url, data, options) => {
     body: JSON.stringify(data)
   };
 
+  await csrf();
+
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };
 
@@ -88,6 +104,8 @@ export const patch = async (url, data, options) => {
     body: JSON.stringify(data)
   };
 
+  await csrf();
+
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };
 
@@ -102,6 +120,14 @@ export const postFile = async (url, data, options) => {
     method: 'POST',
     body: data
   };
+
+  await csrf();
+
+  return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
+};
+
+export const request = async (url, options) => {
+  const finalOptions = { ...options, ...DEFAULT_OPTION, method: 'GET' };
 
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };

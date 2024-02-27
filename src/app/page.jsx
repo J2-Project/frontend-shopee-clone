@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
-import Image from 'next/image';
-import styles from './page.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { getProvinces } from '@/store/slices/provinceSlice';
+import Image from 'next/image';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './page.module.css';
 
 export default function Home() {
   const dispatch = useDispatch();
