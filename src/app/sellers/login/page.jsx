@@ -1,12 +1,12 @@
 'use client';
 
 import { api } from '@/services/api';
-import { csrf, post } from '@/services/request';
-import React, { useState } from 'react';
+import { post } from '@/services/request';
+import React from 'react';
 
 export default function Page() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,13 +21,12 @@ export default function Page() {
     const data = {
       identifier: e.target.value,
       password: e.target.value
-      };
+    };
 
-      const res = post(api.login, {
-        identifier: username,
-        password
-      });
-      console.log(res)
+    const res = post(api.login, {
+      identifier: username,
+      password
+    });
   };
 
   return (

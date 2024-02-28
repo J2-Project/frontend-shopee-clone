@@ -5,13 +5,17 @@ const DEFAULT_OPTION = {
     'X-Requested-With': 'XMLHttpRequest',
     withCredentials: true,
     withXSRFToken: true,
+    credentials: 'include'
   }
 };
 
 export const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const csrf = async () => {
-  return await get(`${BASE_API_URL}sanctum/csrf-cookie`);
+const fetchCsrf = async () => {
+  await fetch(`${BASE_API_URL}sanctum/csrf-cookie`, {
+    method: 'GET',
+    ...DEFAULT_OPTION
+  });
 };
 
 const checkStatus = (response) => {
@@ -60,17 +64,16 @@ export const post = async (url, data, options) => {
   if (localStorage.getItem('token')) {
     DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
-  console.log(data)
+
+  await fetchCsrf();
 
   const finalOptions = {
     ...options,
     ...DEFAULT_OPTION,
     method: 'POST',
-    credentials: 'same-origin',
+    credentials: 'include',
     body: JSON.stringify(data)
   };
-
-  // await csrf();
 
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };
@@ -80,10 +83,13 @@ export const put = async (url, data, options) => {
     DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
+  await fetchCsrf();
+
   const finalOptions = {
     ...options,
     ...DEFAULT_OPTION,
-    method: 'PUT',
+    method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(data)
   };
 
@@ -97,10 +103,13 @@ export const patch = async (url, data, options) => {
     DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
+  await fetchCsrf();
+
   const finalOptions = {
     ...options,
     ...DEFAULT_OPTION,
-    method: 'PATCH',
+    method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(data)
   };
 
@@ -114,14 +123,14 @@ export const postFile = async (url, data, options) => {
     DEFAULT_OPTION.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
+  await fetchCsrf();
+
   const finalOptions = {
     ...options,
     ...DEFAULT_OPTION,
     method: 'POST',
-    body: data
+    body: JSON.stringify(data)
   };
-
-  await csrf();
 
   return await fetch(url, finalOptions).then(checkStatus).then(parseJSON);
 };
