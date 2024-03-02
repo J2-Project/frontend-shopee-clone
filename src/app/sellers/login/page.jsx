@@ -7,7 +7,8 @@ import Image from 'next/image';
 const Container = styled(Grid)({
   maxWidth: '1040px',
   margin: '0 auto',
-  height: '600px'
+  height: '600px',
+  minHeight: "calc(100vh - 185px)",
 });
 
 const Title = styled('p')({

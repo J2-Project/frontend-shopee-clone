@@ -11,13 +11,15 @@ import {
 import { useState } from 'react';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import AddToDriveOutlinedIcon from '@mui/icons-material/AddToDriveOutlined';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 const Container = styled(Box)({
   backgroundColor: '#fff',
   boxSizing: 'border-box',
   boxShadow: '0 3px 10px 0 rgba(0,0,0,.14)',
   borderRadius: '4px',
-  height: '480px'
+  width: '400px',
+  minHeight: '482px'
 });
 
 const Header = styled(Box)({
@@ -49,7 +51,11 @@ const ButtonSubmit = styled(Button)({
   color: '#fff',
   backgroundColor: '#ee4d2d',
   boxShadow: '0 1px 1px rgba(0,0,0,.09)',
-  marginBottom: '10px'
+  marginBottom: '10px',
+  '&:hover': {
+    backgroundColor: '#ee4d2d !important',
+    opacity: '.91'
+  }
 });
 
 const ResetPassword = styled('p')({
@@ -89,40 +95,37 @@ const Login = () => {
     <Container>
       <Header>Đăng nhập</Header>
       <Body action={handleSubmit}>
-        <TextField
+        <OutlinedInput
           autoComplete="off"
           type="text"
-          variant="outlined"
           size="small"
-          label="Email/Số điện thoại"
+          placeholder="Email/Số điện thoại"
           fullWidth
           sx={{ marginBottom: '26px' }}
         />
-        <TextField
+        <OutlinedInput
           autoComplete="off"
           type={showPassword ? 'text' : 'password'}
           variant="outlined"
           size="small"
-          label="Password"
+          placeholder="Password"
           fullWidth
-          InputProps={{
-            endAdornment: (
+            endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={() => handleClickShowPassword()}
+                  onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            )
-          }}
+            }
         />
         <Box sx={{ marginTop: '30px' }}>
           <ButtonSubmit variant="contained" fullWidth type="submit">
-            Contained
+            Đăng nhập
           </ButtonSubmit>
           <ResetPassword>Quên mật khẩu?</ResetPassword>
         </Box>
@@ -170,7 +173,7 @@ const Login = () => {
             }}
           >
             Bạn mới biết đến Shopee?{' '}
-            <a href style={{ color: '#ee4d2d', fontSize: '.875rem' }}>
+            <a href="/" style={{ color: '#ee4d2d', fontSize: '.875rem' }}>
               Đăng ký
             </a>
           </Box>

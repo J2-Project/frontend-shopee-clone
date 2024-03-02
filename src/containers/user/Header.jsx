@@ -16,7 +16,9 @@ const Item = styled(Box)(({ type }) => ({
   color: '#ee4d2d'
 }));
 
-const Logo = styled(Image)({});
+const Logo = styled(Image)({
+  paddingBottom: '10px',
+});
 
 const Title = styled(Typography)({
   color: '#222',
@@ -32,13 +34,13 @@ const Header = ({ permission }) => {
       alignContent="center"
     >
       <Grid item xs={6}>
-        <Item type="start">
+        <Item type="center">
           <Logo src="/Shopee.svg" alt="" width="170" height="84" />
           <Title>{permission ? 'Kênh người bán' : 'Đăng nhập'}</Title>
         </Item>
       </Grid>
       <Grid item xs={6}>
-        <Item type="end">Bạn cần giúp đỡ?</Item>
+        <Item type="center">Bạn cần giúp đỡ?</Item>
       </Grid>
     </Container>
   );

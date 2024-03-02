@@ -7,10 +7,14 @@ const Container = styled(Box)({
   }
 });
 
+const year = new Date().getFullYear();
+
 const Footer = ({ permission }) => {
   return (
     <Container>
-      <p>© 2024 Shopee. Tất cả các quyền được bảo lưu.</p>
+      <div style={{ padding: '2.5rem 0', color: '#0000008a' }}>
+        © {year} Shopee. Tất cả các quyền được bảo lưu.
+      </div>
     </Container>
   );
 };
