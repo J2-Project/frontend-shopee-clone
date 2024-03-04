@@ -1,5 +1,7 @@
 'use client';
 
+import AddToCart from '@/components/AddToCart';
+import BuyButton from '@/components/BuyButton';
 import { api } from '@/services/api';
 import { post } from '@/services/request';
 import React from 'react';
@@ -45,6 +47,8 @@ export default function Page() {
         <br />
         <button type="submit">Login</button>
       </form>
+      <AddToCart />
+      <BuyButton />
     </div>
   );
 }
